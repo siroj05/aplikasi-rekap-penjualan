@@ -1,7 +1,8 @@
 <?php
 require 'config.php';
 
-$data = result("SELECT * FROM data_akun");
+$data = result("SELECT * FROM data_akun ORDER BY id DESC");
+
 
 
 ?>
@@ -21,33 +22,41 @@ $data = result("SELECT * FROM data_akun");
   </head>
   <body>
     <div class="container-md">
-        <h1 class="text-center" >Data Akun</h1>
-        <a href="tambah.php" class="btn btn-primary">Tambah Akun</a>
-        <table class="table table-success table-striped mt-2" border="4">
-            <thead>
-                <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">Data akun</th>
-                    <th scope="col">Nama akun</th>
-                    <th scope="col">Harga Jual</th>
-                    <th scope="col">Harga Beli</th>
-                    <th scope="col">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php $i=1; ?>
-            <?php foreach($data as $akun): ?>
-                <tr>
-                    <td class="fw-bold"><?php echo $i ?></td>
-                    <td><?= $akun["data_akun"] ?></td>
-                    <td><?= $akun["nama_akun"] ?></td>
-                    <td><?= $akun["harga_jual"] ?></td>
-                    <td><?= $akun["harga_beli"] ?></td>
-                    <td><a href="" class="btn btn-warning">Edit</a><a href="" class="btn btn-danger">Hapus</a></td>
-                </tr>
-            <?php $i++; ?>
-            <?php endforeach; ?>    
-            </tbody>
+      
+      <form action="" method="post">
+        <input type="text" name="keywoard" autocomplete="off">
+        <button type="submit" name="cari">Cari!</button>
+      </form>
+
+
+      <h1 class="text-center" >Data Akun</h1>
+      <a href="tambah.php" class="btn btn-primary">Tambah Akun</a>
+      <table class="table table-success table-striped mt-2" border="4">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Data akun</th>
+            <th scope="col">Nama akun</th>
+            <th scope="col">Harga Jual</th>
+            <th scope="col">Harga Beli</th>
+            <th scope="col">Aksi</th>
+          </tr>
+          </thead>
+          <tbody>
+          <?php $i=1; ?>
+          <?php foreach($data as $akun): ?>
+              <tr>
+                  <td class="fw-bold"><?php echo $i ?></td>
+                  <td><?= $akun["data_akun"]; ?></td>
+                  <td><?= $akun["nama_akun"]; ?></td>
+                  <td><?= $akun["harga_jual"]; ?></td>
+                  <td><?= $akun["harga_beli"]; ?></td>
+                  <td><a href="edit.php?id=<?= $akun["id"]; ?>" class="btn btn-warning">Edit</a><a href="hapus.php?id=<?= $akun["id"]; ?>" class="btn btn-danger" 
+                  onclick="return confirm('Anda Yakin Data Dihapus?');">Hapus</a></td>
+              </tr>
+          <?php $i++; ?>
+          <?php endforeach; ?>    
+           </tbody>
         </table>
     </div>
 
