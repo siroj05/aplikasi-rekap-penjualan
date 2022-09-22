@@ -17,8 +17,30 @@ function tambah($data){
     global $conn;
 
     $email = htmlspecialchars($data["email"]);
-    $username = htmlspecialchars($data["username"]);
-    $password = htmlspecialchars($data["password"]);
+    $username = stripslashes(htmlspecialchars($data["username"]));
+    $password = mysqli_real_escape_string($conn, $data["password"]);
+    $password2 = mysqli_real_escape_string($conn, $data["password2"]);
+
+    $hasil = mysqli_query($conn, "SELECT username FROM admin WHERE username = '$username'");
+
+    if (mysqli_fetch_assoc($hasil)){
+        echo "
+            <script>
+            alert('Username sudah digunakan!');
+            </script>";
+        return false;
+    }
+
+    if ($password !== $password2){
+        echo "
+            <script>
+            alert('Password tidak sama!');
+            </script>";
+        return false;
+    }
+
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
 
     $query = "INSERT INTO admin VALUES ('', '$email', '$username', '$password')";
 
@@ -64,6 +86,12 @@ function edit($data){
     mysqli_query($conn, $query);
 
     return mysqli_affected_rows($conn);
+}
+
+function cari($data){
+    global $conn;
+    $query = "SELECT * FROM data_akun WHERE data_akun LIKE '%$data%' OR nama_akun LIKE '%$data%' OR harga_jual LIKE '%data%' OR harga_beli LIKE '%data%'";
+    return result($query);
 }
 
 ?>

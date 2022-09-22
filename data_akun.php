@@ -1,7 +1,11 @@
 <?php
 require 'config.php';
 
-$data = result("SELECT * FROM data_akun ORDER BY id DESC");
+$data = result("SELECT * FROM data_akun");
+
+if(isset($_POST["cari"])){
+  $data = cari($_POST["keyword"]);
+}
 
 
 
@@ -23,14 +27,14 @@ $data = result("SELECT * FROM data_akun ORDER BY id DESC");
   <body>
     <div class="container-md">
       
-      <form action="" method="post">
-        <input type="text" name="keywoard" autocomplete="off">
-        <button type="submit" name="cari">Cari!</button>
-      </form>
-
-
+      
+      
       <h1 class="text-center" >Data Akun</h1>
-      <a href="tambah.php" class="btn btn-primary">Tambah Akun</a>
+      <a href="tambah.php" class="btn btn-primary mb-2">Tambah Akun</a>
+      <form action="" method="post">
+        <input type="text" name="keyword" size="80" placeholder="Masukan Keyword..." autocomplete="off">
+        <button type="submit" name="cari">Cari!</button>  
+      </form>
       <table class="table table-success table-striped mt-2" border="4">
         <thead>
           <tr>
