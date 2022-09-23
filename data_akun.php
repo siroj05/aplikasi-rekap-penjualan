@@ -1,6 +1,13 @@
 <?php
 require 'config.php';
 
+session_start();
+
+if(!isset($_SESSION["login"])){
+  header("location: login.php");
+  exit;
+}
+
 $data = result("SELECT * FROM data_akun");
 
 if(isset($_POST["cari"])){
@@ -28,8 +35,9 @@ if(isset($_POST["cari"])){
     <div class="container-md">
       
       
-      
+      <a href="logout.php">Logout!</a>
       <h1 class="text-center" >Data Akun</h1>
+      
       <a href="tambah.php" class="btn btn-primary mb-2">Tambah Akun</a>
       <form action="" method="post">
         <input type="text" name="keyword" size="80" placeholder="Masukan Keyword..." autocomplete="off">

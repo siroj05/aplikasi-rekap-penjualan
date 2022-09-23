@@ -1,6 +1,13 @@
 <?php
     require 'config.php';
 
+    session_start();
+
+    if(!isset($_SESSION["login"])){
+        header("location: login.php");
+        exit;
+    }
+
     if(isset($_POST["submit"])){
         if(tambah_akun($_POST)>0){
             echo "
