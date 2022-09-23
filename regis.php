@@ -9,10 +9,10 @@
     }
     
     if(isset($_POST["submit"])){
-        if(strlen($_POST['username']) < 3){
+        if(strlen($_POST['username']) < 3 || strlen($_POST['password']) < 3){
             echo "
             <script>
-            alert('Username kurang panjang!!!');
+            alert('Username atau password kurang panjang!!!');
             </script>";
         }
         else{
