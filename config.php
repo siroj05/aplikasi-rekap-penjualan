@@ -89,9 +89,34 @@ function edit($data){
 }
 
 function cari($data){
-    global $conn;
     $query = "SELECT * FROM data_akun WHERE data_akun LIKE '%$data%' OR nama_akun LIKE '%$data%' OR harga_jual LIKE '%data%' OR harga_beli LIKE '%data%'";
     return result($query);
 }
 
+function total(){
+    $data_harga = result("SELECT * FROM data_akun");
+    $total = 0;
+    $harga_beli = 0;
+    foreach($data_harga as $jumlah){
+        $total += $jumlah["harga_jual"];
+        $harga_beli += $jumlah["harga_beli"];
+    }
+    echo $total - $harga_beli;
+}
+
+function sold($data){
+
+    global $conn;
+    $id = $data["id"];
+    // $data_akun = htmlspecialchars($data["data_akun"]);
+    // $nama_akun = htmlspecialchars($data["nama_akun"]);
+    // $harga_jual = htmlspecialchars($data["harga_jual"]);
+    // $harga_beli = htmlspecialchars($data["harga_beli"]);
+
+    $query = "INSERT INTO akun_terjual (id, data_akun, nama_akun, harga_jual, harga_beli) SELECT '', data_akun, nama_akun, harga_jual, harga_beli FROM data_akun WHERE id=$id";
+
+    mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
+}
 ?>

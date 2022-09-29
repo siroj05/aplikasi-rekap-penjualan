@@ -40,6 +40,15 @@
         <h1 class="text-center mt-5" >Tambah Akun Baru</h1>
         <form action="" method="post">
             <div class="mb-3">
+                <!-- <label for="kode">Kode Akun</label>
+                <select name="kode" id="kode" class="form-select" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select> -->
+            </div>
+            <div class="mb-3">
                 <label for="data_akun" class="form-label">Data Akun</label>
                 <input type="text" class="form-control" id="data_akun" name="data_akun" placeholder="Username & Password Akun" required/>
             </div>

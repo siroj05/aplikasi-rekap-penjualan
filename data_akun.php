@@ -32,17 +32,46 @@ if(isset($_POST["cari"])){
     <title>Data Akun</title>
   </head>
   <body>
+    <h1 class="text-center mt-5" >Akun Genshin Impact</h1>
     <div class="container-md">
+
+      <!-- -------NAVBAR-------- -->
       
-      
-      <a href="logout.php">Logout!</a>
-      <h1 class="text-center" >Data Akun</h1>
-      
-      <a href="tambah.php" class="btn btn-primary mb-2">Tambah Akun</a>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link " href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Akun</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="logout.php">Logout</a>
+        </li>
+      </ul>
+
+      <!-- ------end of navbar-------- -->
+
+      <!-- content -->
+      <!-- button -->
+
+      <a href="tambah.php" class="btn btn-primary mb-2 mt-4">Tambah Akun</a>
+
+      <!-- button -->
+
+
+      <!-- form search -->
       <form action="" method="post">
-        <input type="text" name="keyword" size="80" placeholder="Masukan Keyword..." autocomplete="off">
-        <button type="submit" name="cari">Cari!</button>  
+        <div class="row g-3">
+          <div class="col">
+            <input type="text" name="keyword" size="80" class="form-control" class="" placeholder="Masukan Keyword..." autocomplete="off">
+          </div>
+          <div class="col">
+            <button type="submit" class="btn btn-primary" name="cari">Cari!</button>
+          </div>
+        </div>
+        <p class="mt-2">Anda Bisa Mendapat : <?php total(); ?></p> 
       </form>
+      <!-- form search -->
       <table class="table table-success table-striped mt-2" border="4">
         <thead>
           <tr>
@@ -63,13 +92,16 @@ if(isset($_POST["cari"])){
                   <td><?= $akun["nama_akun"]; ?></td>
                   <td><?= $akun["harga_jual"]; ?></td>
                   <td><?= $akun["harga_beli"]; ?></td>
-                  <td><a href="edit.php?id=<?= $akun["id"]; ?>" class="btn btn-warning">Edit</a><a href="hapus.php?id=<?= $akun["id"]; ?>" class="btn btn-danger" 
-                  onclick="return confirm('Anda Yakin Data Dihapus?');">Hapus</a></td>
+                  <td>
+                  <a href="edit.php?id=<?= $akun["id"]; ?>" class="btn btn-warning btn-sm">Revisi</a>
+                  <a href="hapus.php?id=<?= $akun["id"]; ?>" class="btn btn-danger btn-sm" 
+                  onclick="return confirm('Anda Yakin Data Dihapus?');">Terjual</a></td>
               </tr>
           <?php $i++; ?>
           <?php endforeach; ?>    
            </tbody>
         </table>
+        
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
