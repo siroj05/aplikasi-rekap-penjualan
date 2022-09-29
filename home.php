@@ -9,6 +9,7 @@ if(!isset($_SESSION["login"])){
 }
 
 $data = result("SELECT * FROM data_akun");
+$data2 = result("SELECT * FROM akun_terjual");
 
 if(isset($_POST["cari"])){
   $data = cari($_POST["keyword"]);
@@ -39,10 +40,10 @@ if(isset($_POST["cari"])){
       
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link " href="home.php">Home</a>
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Akun</a>
+          <a class="nav-link"  href="data_akun.php">Akun</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="logout.php">Logout</a>
@@ -54,13 +55,13 @@ if(isset($_POST["cari"])){
       <!-- content -->
       <!-- button -->
 
-      <a href="tambah.php" class="btn btn-primary mb-2 mt-4">Tambah Akun</a>
+      <!-- <a href="tambah.php" class="btn btn-primary mb-2 mt-4">Tambah Akun</a> -->
 
       <!-- button -->
 
 
       <!-- form search -->
-      <form action="" method="post">
+      <!-- <form action="" method="post">
         <div class="row g-3">
           <div class="col">
             <input type="text" name="keyword" size="80" class="form-control" class="" placeholder="Masukan Keyword..." autocomplete="off">
@@ -69,38 +70,62 @@ if(isset($_POST["cari"])){
             <button type="submit" class="btn btn-primary" name="cari">Cari!</button>
           </div>
         </div>
-        <p class="mt-2">Anda Bisa Mendapat : <?php total(); ?></p> 
+         
       </form>
-      <!-- form search -->
-      <table class="table table-success table-striped mt-2">
-        <thead>
-          <tr>
-            <th scope="col">No</th>
-            <th scope="col">Data akun</th>
-            <th scope="col">Nama akun</th>
-            <th scope="col">Harga Jual</th>
-            <th scope="col">Harga Beli</th>
-            <th scope="col">Aksi</th>
-          </tr>
-          </thead>
-          <tbody>
-          <?php $i=1; ?>
-          <?php foreach($data as $akun): ?>
+      form search -->
+      <div class="row">
+        <div class="col belum-kejual">
+          <p class="mt-2">Keuntungan Saat ini: <?php total(); ?></p>
+          <table class="table table-success table-striped mt-2" border="0">
+            <thead>
               <tr>
-                  <td class="fw-bold"><?php echo $i ?></td>
-                  <td><?= $akun["data_akun"]; ?></td>
-                  <td><?= $akun["nama_akun"]; ?></td>
-                  <td><?= $akun["harga_jual"]; ?></td>
-                  <td><?= $akun["harga_beli"]; ?></td>
-                  <td>
-                  <a href="edit.php?id=<?= $akun["id"]; ?>" class="btn btn-warning btn-sm">Revisi</a>
-                  <a href="hapus.php?id=<?= $akun["id"]; ?>" class="btn btn-danger btn-sm" 
-                  onclick="return confirm('Anda Yakin Data Dihapus?');">Hapus</a></td>
+                <th scope="col">No</th>
+                <th scope="col">Nama akun</th>
+                <th scope="col">Harga Jual</th>
+                <th scope="col">Harga Beli</th>
               </tr>
-          <?php $i++; ?>
-          <?php endforeach; ?>    
-           </tbody>
-        </table>
+              </thead>
+              <tbody>
+              <?php $i=1; ?>
+              <?php foreach($data as $akun): ?>
+                  <tr>
+                      <td class="fw-bold"><?php echo $i ?></td>
+                      <td><?= $akun["nama_akun"]; ?></td>
+                      <td><?= $akun["harga_jual"]; ?></td>
+                      <td><?= $akun["harga_beli"]; ?></td>
+                  </tr>
+              <?php $i++; ?>
+              <?php endforeach; ?>    
+               </tbody>
+            </table>
+        </div>
+        <div class="col">
+        <p class="mt-2">Masuk Kantong : <?php total2(); ?></p>
+        <table class="table table-warning table-striped mt-2" border="0">
+            <thead>
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Nama akun</th>
+                <th scope="col">Harga Jual</th>
+                <th scope="col">Harga Beli</th>
+              </tr>
+              </thead>
+              <tbody>
+              <?php $i=1; ?>
+              <?php foreach($data2 as $akun2): ?>
+                  <tr>
+                      <td class="fw-bold"><?php echo $i ?></td>
+                      <td><?= $akun2["nama_akun"]; ?></td>
+                      <td><?= $akun2["harga_jual"]; ?></td>
+                      <td><?= $akun2["harga_beli"]; ?></td>
+                  </tr>
+              <?php $i++; ?>
+              <?php endforeach; ?>    
+               </tbody>
+            </table>
+        </div>
+
+      </div>
         
     </div>
 

@@ -22,6 +22,14 @@
             alert('Gagal! Berubah');
             </script>";
         }
+    }elseif(isset($_POST["laku"])){
+        if(sold($_POST)>0){
+            echo "
+            <script>
+            alert('Akun Terjual!');
+            document.location.href = 'data_akun.php';
+            </script>";
+        }
     }
 ?>
 
@@ -58,8 +66,59 @@
                 <label for="harga_beli" class="form-label">Harga Beli</label>
                 <input type="number" class="form-control" id="harga_beli" name="harga_beli" value="<?= $ubah["harga_beli"]; ?>" required/>
             </div>
-            <button type="submit" name="submit" class="btn btn-primary">Ganti</button>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#static">
+                Simpan Perubahan
+                </button>
+        
+                <!-- Modal -->
+                <div class="modal fade" id="static" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Simpan Perubahan!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Anda yakin merevisi akun ini?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" name="submit" class="btn btn-primary">Ya</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- <button type="submit" name="submit" class="btn btn-primary">Simpan Perubahan</button> -->
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Terjual
+                </button>
+        
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Akun terjual!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Anda yakin akun ini sudah terjual?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" name="laku" class="btn btn-success">Ya</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <!-- <button type="submit" name="laku" class="btn btn-success">Terjual</button> -->
+            </div>
         </form>
+
         
     </div>
     <!-- Optional JavaScript; choose one of the two! -->
