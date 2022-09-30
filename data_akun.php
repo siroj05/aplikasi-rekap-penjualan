@@ -41,8 +41,12 @@ if(isset($_POST["cari"])){
         <li class="nav-item">
           <a class="nav-link " href="home.php">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Akun</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link active dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Akun</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Akun Ready</a></li>
+            <li><a class="dropdown-item" href="akun_sold.php">Akun Sold</a></li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="logout.php">Logout</a>
@@ -69,13 +73,14 @@ if(isset($_POST["cari"])){
             <button type="submit" class="btn btn-primary" name="cari">Cari!</button>
           </div>
         </div>
-        <p class="mt-2">Anda Bisa Mendapat : <?php total(); ?></p> 
+        
       </form>
       <!-- form search -->
       <table class="table table-success table-striped mt-2">
         <thead>
           <tr>
             <th scope="col">No</th>
+            <th scope="col">Kode</th>
             <th scope="col">Data akun</th>
             <th scope="col">Nama akun</th>
             <th scope="col">Harga Jual</th>
@@ -88,6 +93,7 @@ if(isset($_POST["cari"])){
           <?php foreach($data as $akun): ?>
               <tr>
                   <td class="fw-bold"><?php echo $i ?></td>
+                  <td><?= $akun["kode"]; ?></td>
                   <td><?= $akun["data_akun"]; ?></td>
                   <td><?= $akun["nama_akun"]; ?></td>
                   <td><?= $akun["harga_jual"]; ?></td>

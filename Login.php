@@ -23,7 +23,7 @@ if (isset($_POST["login"])){
             $_SESSION["login"] = true;
 
 
-            header("Location: data_akun.php");
+            header("Location: home.php");
             exit;
         };
 

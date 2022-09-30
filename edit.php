@@ -50,6 +50,28 @@
         <h1 class="text-center mt-5" >Edit Data Akun</h1>
         <form action="" method="post">
             <input type="hidden" name="id" value="<?= $ubah["id"] ?>">
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="kode">Kode</label>
+                <select class="form-select" name="kode" id="kode">
+                    <option value="<?= $ubah["kode"]; ?>"><?= $ubah["kode"]; ?></option>
+                    <option value="B1">B1</option>
+                    <option value="B2">B2</option>
+                    <option value="B3">B3</option>
+                    <option value="B4">B4</option>
+                    <option value="B5">B5</option>
+                    <option value="B6">B6</option>
+                    <option value="B7">B7</option>
+                    <option value="B8">B8</option>
+                    <option value="B9">B9</option>
+                    <option value="B10">B10</option>
+                    <option value="B11">B11</option>
+                    <option value="B12">B12</option>
+                    <option value="B13">B13</option>
+                    <option value="B14">B14</option>
+                    <option value="B15">B15</option>
+                    <option value="B16">B16</option>
+                </select>
+            </div>
             <div class="mb-3">
                 <label for="data_akun" class="form-label">Data Akun</label>
                 <input type="text" class="form-control" id="data_akun" name="data_akun" placeholder="Username & Password Akun" value="<?= $ubah["data_akun"]; ?>" required/>

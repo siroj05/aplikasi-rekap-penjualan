@@ -52,13 +52,13 @@ function tambah($data){
 function tambah_akun($data){
     
     global $conn;
-
+    $kode = htmlspecialchars($data["kode"]);
     $data_akun = htmlspecialchars($data["data_akun"]);
     $nama_akun = htmlspecialchars($data["nama_akun"]);
     $harga_jual = htmlspecialchars($data["harga_jual"]);
     $harga_beli = htmlspecialchars($data["harga_beli"]);
 
-    $query = "INSERT INTO data_akun VALUES ('', '$data_akun', '$nama_akun', $harga_jual, $harga_beli)";
+    $query = "INSERT INTO data_akun VALUES ('', '$data_akun', '$nama_akun', $harga_jual, $harga_beli, '$kode')";
 
     mysqli_query($conn, $query);
 
@@ -73,15 +73,23 @@ function hapus($id){
     return mysqli_affected_rows($conn);
 }
 
+function hapus_jual($id){
+    global $conn;
+    mysqli_query($conn, "DELETE FROM akun_terjual WHERE id=$id");
+
+    return mysqli_affected_rows($conn);
+}
+
 function edit($data){
     global $conn;
     $id = $data["id"];
+    $kode = htmlspecialchars($data["kode"]);
     $data_akun = htmlspecialchars($data["data_akun"]);
     $nama_akun = htmlspecialchars($data["nama_akun"]);
     $harga_jual = htmlspecialchars($data["harga_jual"]);
     $harga_beli = htmlspecialchars($data["harga_beli"]);
 
-    $query = "UPDATE data_akun SET data_akun = '$data_akun', nama_akun = '$nama_akun', harga_jual = $harga_jual, harga_beli = $harga_beli WHERE id = $id";
+    $query = "UPDATE data_akun SET data_akun = '$data_akun', nama_akun = '$nama_akun', harga_jual = $harga_jual, harga_beli = $harga_beli, kode = '$kode' WHERE id = $id";
 
     mysqli_query($conn, $query);
 
@@ -90,6 +98,11 @@ function edit($data){
 
 function cari($data){
     $query = "SELECT * FROM data_akun WHERE data_akun LIKE '%$data%' OR nama_akun LIKE '%$data%' OR harga_jual LIKE '%data%' OR harga_beli LIKE '%data%'";
+    return result($query);
+}
+
+function cari_sold($data){
+    $query = "SELECT * FROM akun_terjual WHERE data_akun LIKE '%$data%' OR nama_akun LIKE '%$data%' OR harga_jual LIKE '%data%' OR harga_beli LIKE '%data%'";
     return result($query);
 }
 
@@ -118,12 +131,13 @@ function total2(){
 function sold($data){
 
     global $conn;
+    $kode = htmlspecialchars($data["kode"]);
     $data_akun = htmlspecialchars($data["data_akun"]);
     $nama_akun = htmlspecialchars($data["nama_akun"]);
     $harga_jual = htmlspecialchars($data["harga_jual"]);
     $harga_beli = htmlspecialchars($data["harga_beli"]);
 
-    $query = "INSERT INTO akun_terjual VALUES ('', '$data_akun', '$nama_akun', $harga_jual, $harga_beli)";
+    $query = "INSERT INTO akun_terjual VALUES ('', '$data_akun', '$nama_akun', $harga_jual, $harga_beli, '$kode')";
 
     mysqli_query($conn, $query);
 

@@ -8,11 +8,10 @@ if(!isset($_SESSION["login"])){
   exit;
 }
 
-$data = result("SELECT * FROM data_akun");
-$data2 = result("SELECT * FROM akun_terjual");
+$data = result("SELECT * FROM akun_terjual");
 
 if(isset($_POST["cari"])){
-  $data = cari($_POST["keyword"]);
+  $data = cari_sold($_POST["keyword"]);
 }
 
 
@@ -40,31 +39,32 @@ if(isset($_POST["cari"])){
       
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link " href="home.php">Home</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Akun</a>
+          <a class="nav-link active dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Akun</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="data_akun.php">Akun Ready</a></li>
-            <li><a class="dropdown-item" href="akun_sold.php">Akun Sold</a></li>
+            <li><a class="dropdown-item" href="#">Akun Sold</a></li>
           </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="logout.php">Logout</a>
         </li>
       </ul>
+
       <!-- ------end of navbar-------- -->
 
       <!-- content -->
       <!-- button -->
 
-      <!-- <a href="tambah.php" class="btn btn-primary mb-2 mt-4">Tambah Akun</a> -->
+      <a href="tambah.php" class="btn btn-primary mb-2 mt-4">Tambah Akun</a>
 
       <!-- button -->
 
 
       <!-- form search -->
-      <!-- <form action="" method="post">
+      <form action="" method="post">
         <div class="row g-3">
           <div class="col">
             <input type="text" name="keyword" size="80" class="form-control" class="" placeholder="Masukan Keyword..." autocomplete="off">
@@ -73,31 +73,40 @@ if(isset($_POST["cari"])){
             <button type="submit" class="btn btn-primary" name="cari">Cari!</button>
           </div>
         </div>
-         
+        
       </form>
-      form search -->
-      <div class="row mt-4">
-        <div class="col">
-          <div class="card text-white bg-success mb-3 mt-3 text-center w-100" >
-            <h5 class="card-header">Total Income</h5>
-            <div class="card-body">
-              <h1 class="card-title">Rp<?php total2(); ?></h1>
-            </div>
-          </div>
-
-        </div>
-        <div class="col">
-        <div class="card text-white bg-warning mb-3 mt-3 text-center w-100" >
-            <h5 class="card-header">Prakiraan Income</h5>
-            <div class="card-body">
-              <h1 class="card-title">Rp<?php total(); ?></h1>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      
+      <!-- form search -->
+      <table class="table table-warning table-striped mt-2">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Kode</th>
+            <th scope="col">Data akun</th>
+            <th scope="col">Nama akun</th>
+            <th scope="col">Harga Jual</th>
+            <th scope="col">Harga Beli</th>
+            <th scope="col">Aksi</th>
+          </tr>
+          </thead>
+          <tbody>
+          <?php $i=1; ?>
+          <?php foreach($data as $akun): ?>
+              <tr>
+                  <td class="fw-bold"><?php echo $i ?></td>
+                  <td><?= $akun["kode"]; ?></td>
+                  <td><?= $akun["data_akun"]; ?></td>
+                  <td><?= $akun["nama_akun"]; ?></td>
+                  <td><?= $akun["harga_jual"]; ?></td>
+                  <td><?= $akun["harga_beli"]; ?></td>
+                  <td>
+                  <a href="hapus_jual.php?id=<?= $akun["id"]; ?>" class="btn btn-danger btn-sm" 
+                  onclick="return confirm('Anda Yakin Data Dihapus?');">Hapus</a></td>
+              </tr>
+          <?php $i++; ?>
+          <?php endforeach; ?>    
+           </tbody>
+        </table>
+        
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
