@@ -47,7 +47,7 @@ if(isset($_POST["cari"])){
       
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link " href="index.php">Home</a>
+          <a class="nav-link " href="home.php">Home</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link active dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Akun</a>
