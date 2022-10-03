@@ -8,7 +8,13 @@ if(!isset($_SESSION["login"])){
   exit;
 }
 
-$data = result("SELECT * FROM akun_terjual");
+$jumlahperhalaman = 8;
+$jumlahdata = count(result("SELECT * FROM akun_terjual"));
+$jumlahHalaman = ceil($jumlahdata/$jumlahperhalaman);
+$halamanaktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
+$awalData = ($jumlahperhalaman * $halamanaktif) - $jumlahperhalaman;
+
+$data = result("SELECT * FROM akun_terjual LIMIT $awalData, $jumlahperhalaman");
 
 if(isset($_POST["cari"])){
   $data = cari_sold($_POST["keyword"]);
@@ -106,6 +112,22 @@ if(isset($_POST["cari"])){
           <?php endforeach; ?>    
            </tbody>
         </table>
+      
+      <!-- Pagination -->
+      <nav aria-label="...">
+        <ul class="pagination pagination-sm justify-content-center">
+      <?php for($i=1;$i<=$jumlahHalaman;$i++){ ?>
+        <?php if($i == $halamanaktif): ?>
+            <li class="page-item active" aria-current="page">
+              <span class="page-link"><?= $i; ?></span>
+            </li>
+        <?php else: ?>
+            <li class="page-item"><a class="page-link" href="?halaman=<?= $i; ?>"><?= $i; ?></a></li>
+        <?php endif; ?>
+      <?php } ?>
+        </ul>
+      </nav>
+      <!--End Pagination -->
         
     </div>
 
