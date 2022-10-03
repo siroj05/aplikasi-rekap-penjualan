@@ -33,6 +33,7 @@ if(isset($_POST["cari"])){
     <title>Data Akun</title>
   </head>
   <body>
+    <h1 class="text-center mt-5" >Selamat Datang Tuan Muda Siroojuddin</h1>
     <h1 class="text-center mt-5" >Akun Genshin Impact</h1>
     <div class="container-md">
 

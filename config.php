@@ -97,7 +97,7 @@ function edit($data){
 }
 
 function cari($data){
-    $query = "SELECT * FROM data_akun WHERE data_akun LIKE '%$data%' OR nama_akun LIKE '%$data%' OR harga_jual LIKE '%data%' OR harga_beli LIKE '%data%'";
+    $query = "SELECT * FROM data_akun WHERE data_akun LIKE '%$data%' OR nama_akun LIKE '%$data%' OR harga_jual LIKE '%$data%' OR harga_beli LIKE '%$data%' OR kode LIKE '%$data%'";
     return result($query);
 }
 
