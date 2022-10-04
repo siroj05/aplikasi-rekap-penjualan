@@ -39,7 +39,10 @@
     <div class="container-md">
         <h1 class="text-center mt-5" >Tambah Akun Baru</h1>
         <form action="" method="post">
-            
+            <div class="mb-3">
+                <label for="seller" class="form-label">Url Seller</label>
+                <input type="text" class="form-control" id="seller" name="seller" placeholder="Isi Url seller">
+            </div>
             <div class="input-group mb-3">
                 <label class="input-group-text" for="kode">Kode</label>
                 <select class="form-select" name="kode" id="kode">

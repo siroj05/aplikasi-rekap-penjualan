@@ -52,13 +52,14 @@ function tambah($data){
 function tambah_akun($data){
     
     global $conn;
+    $seller = htmlspecialchars($data["seller"]);
     $kode = htmlspecialchars($data["kode"]);
     $data_akun = htmlspecialchars($data["data_akun"]);
     $nama_akun = htmlspecialchars($data["nama_akun"]);
     $harga_jual = htmlspecialchars($data["harga_jual"]);
     $harga_beli = htmlspecialchars($data["harga_beli"]);
 
-    $query = "INSERT INTO data_akun VALUES ('', '$data_akun', '$nama_akun', $harga_jual, $harga_beli, '$kode')";
+    $query = "INSERT INTO data_akun VALUES ('', '$data_akun', '$nama_akun', $harga_jual, $harga_beli, '$kode', '$seller')";
 
     mysqli_query($conn, $query);
 
@@ -83,13 +84,14 @@ function hapus_jual($id){
 function edit($data){
     global $conn;
     $id = $data["id"];
+    $seller = htmlspecialchars($data["seller"]);
     $kode = htmlspecialchars($data["kode"]);
     $data_akun = htmlspecialchars($data["data_akun"]);
     $nama_akun = htmlspecialchars($data["nama_akun"]);
     $harga_jual = htmlspecialchars($data["harga_jual"]);
     $harga_beli = htmlspecialchars($data["harga_beli"]);
 
-    $query = "UPDATE data_akun SET data_akun = '$data_akun', nama_akun = '$nama_akun', harga_jual = $harga_jual, harga_beli = $harga_beli, kode = '$kode' WHERE id = $id";
+    $query = "UPDATE data_akun SET data_akun = '$data_akun', nama_akun = '$nama_akun', harga_jual = $harga_jual, harga_beli = $harga_beli, kode = '$kode', seller = '$seller' WHERE id = $id";
 
     mysqli_query($conn, $query);
 
@@ -131,16 +133,21 @@ function total2(){
 function sold($data){
 
     global $conn;
+    $id = $data["id"];
+    $seller = htmlspecialchars($data["seller"]);
     $kode = htmlspecialchars($data["kode"]);
     $data_akun = htmlspecialchars($data["data_akun"]);
     $nama_akun = htmlspecialchars($data["nama_akun"]);
     $harga_jual = htmlspecialchars($data["harga_jual"]);
     $harga_beli = htmlspecialchars($data["harga_beli"]);
 
-    $query = "INSERT INTO akun_terjual VALUES ('', '$data_akun', '$nama_akun', $harga_jual, $harga_beli, '$kode')";
+    $query = "INSERT INTO akun_terjual VALUES ('', '$data_akun', '$nama_akun', $harga_jual, $harga_beli, '$kode', '$seller')";
 
+    if(mysqli_affected_rows($conn)>0){
+        mysqli_query($conn, "DELETE FROM data_akun WHERE id=$id");
+    };
+    
     mysqli_query($conn, $query);
-
     return mysqli_affected_rows($conn);
 }
 ?>
